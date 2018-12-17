@@ -1,0 +1,24 @@
+#app-container {
+   width: 80%;
+   margin: auto;
+}
+
+img {
+    height: 25px;
+}
+
+button {
+    cursor: pointer;
+}
+
+.visibility-hidden {
+    visibility: hidden;
+}
+
+.display-none {
+    display: none !important;
+}
+
+.input-group-text {
+  background-color: #ffffff !important;
+}
