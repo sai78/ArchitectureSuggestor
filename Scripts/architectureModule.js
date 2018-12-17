@@ -1,28 +1,30 @@
 const architectureModule = (() => {
-
     let domElements = {};
-
     // Add newly created group to architecture dropdown list
     const addToArchitectureDropdown = (optionTemplate) => {
-        let $architectureNameList = domElements.architectureNameList;
+        let $architectureDropdownList = domElements.architectureNameList;
         let $architectureEditBtn = domElements.architectureEditBtn;
         let $architectureDeleteBtn = domElements.architectureDeleteBtn;
         let $architectureName = domElements.architectureName;
         let architectureName = $architectureName.val();
+        if(architectureName === '')
+        {
+            alert('please enter Architecture Name');
+        }
+        else{
         let architectureIdCounter = store.state.architectureIdCounter;
         $architectureName.val('');
-        $architectureNameList.prepend(
+        $architectureDropdownList.prepend(
             optionTemplate.replace('#option#', architectureName)
-                          .replace('#name#', architectureName)   
-                          .replace('#value#', architectureIdCounter)
+                .replace('#name#', architectureName)
+                .replace('#value#', architectureIdCounter)
         );
         $architectureEditBtn.removeClass('display-none');
         $architectureDeleteBtn.removeClass('display-none');
         store.incrementArchitectureIdCounter();
-        $architectureNameList.val($architectureNameList.find('option').first().val());
-        
+        $architectureDropdownList.val($architectureDropdownList.find('option').first().val());
+        }
     }
-
     // Initialize DOM elements for architecture Component
     const InitializeDomElements = () => {
         domElements.architectureAddBtn = $('#architecture-add-btn');
@@ -32,7 +34,6 @@ const architectureModule = (() => {
         domElements.architectureDeleteBtn = $('#architecture-delete-btn');
         domElements.architectureEditSaveBtn = $('#architecture-edit-save-btn');
     }
-    
     return {
         domElements,
         addToArchitectureDropdown,
