@@ -3,10 +3,12 @@ const store = {
         architectureObj: {},
         entityObj:{},
         option:{},
+        questionOptionObj:{},
         editMode: false,
         architectureIdCounter: 1,
         entityIdCounter: 1,
-        optionIdCounter: 1
+        optionIdCounter: 1,
+        questionIdCounter: 1
     },
     // Action for incrementing architecure Id counter
     incrementArchitectureIdCounter() {
@@ -18,5 +20,8 @@ const store = {
     },
     incrementOptionIdCounter() {
         this.state.optionIdCounter += 1;
+    },
+    incrementQuestioIdCounter() {
+        this.state.questionIdCounter += 1;
     },
 }

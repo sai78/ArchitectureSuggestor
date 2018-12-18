@@ -4,9 +4,11 @@
       <link rel="stylesheet" type="text/css" href="Styles/index.css" />
       <link rel="stylesheet" type="text/css" href="Styles/header.css" />
       <link rel="stylesheet" type="text/css" href="Styles/appContainer.css" />
+      <link rel="stylesheet" type="text/css" href="Styles/optionQuestionContainer.css" />
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
             crossorigin="anonymous" />
 </head>
+
 <body>
       <div id="header">
             <h1>Azure solution architectures</h1>
@@ -18,7 +20,7 @@
       <br />
       <div id="app-container">
             <div class="row" id="architecture-input-container">
-                  <div class="form-group col-lg-4">
+                  <div class="form-group col-lg-3">
                         <label for="architecture-name-list">Select Architecture</label>
                         <div class="input-group mb-3">
                               <select class="form-control" id="architecture-name-list">
@@ -53,13 +55,13 @@
                   </div>
             </div>
             <div class="row">
-                  <div class="form-group col-lg-4 display-none" id="group-input-container">
+                  <div class="form-group col-lg-3 display-none" id="group-input-container">
                         <label for="groupName-input">Groups</label>
                         <div class="input-group mb-3">
                               <input id="groupName-input" class="form-control" readonly>
                               <div class="input-group-append">
                                     <button id="group-details-display-btn">
-                                          <img src="Images/show.svg" />
+                                          <img src="Images/display.svg" />
                                     </button>
                               </div>
                         </div>
@@ -67,7 +69,7 @@
             </div>
             <div id="group-details-container" class="display-none">
                   <div class="row" id="entity-input-container">
-                        <div class="form-group col-lg-4">
+                        <div class="form-group col-lg-3">
                               <label for="entity-name-list">Select Entity</label>
                               <div class="input-group mb-3">
                                     <select class="form-control" id="entity-name-list"> </select>
@@ -101,53 +103,38 @@
                         </div>
                   </div>
                   <div class="row" id="question-option-input-container">
-                     
-                        <div class="form-group col-lg-4">
+                        <div class="form-group col-lg-8">
                               <label for="entity-list">Select Entity</label>
                               <div class="input-group">
-                                    <select class="form-control" id="entity-list"></select>
-                                    <div class="input-group-append">
-                                          <input type="text" id="question-name" class="form-control" placeholder="Enter your question" />
+                                    <select class="form-control" id="entity-list"> </select>
+                                    <div class="input-group-append" id="question-name-textbox">
+                                          <input type="text" id="question-name" class="form-control" placeholder="Enter your question">
                                     </div>
                                     <div class="input-group-append">
-                                          <select class="form-control" id="option-list">Options</select>
+                                          <input type="text" id="option-name" class="form-control" placeholder="Enter your option"
+                                                list="option-dropdown-list" />
+                                          <datalist id="option-dropdown-list">
+                                          </datalist>
                                     </div>
                                     <div class="input-group-append">
-                                          <button id="option-edit-btn" class="input-group-text edit-btn display-none">
-                                                <img src="Images/edit.svg" />
-                                          </button>
-                                    </div>
-                                    <div class="input-group-append">
-                                          <button id="option-delete-btn" class="input-group-text delete-btn display-none">
-                                                <img src="Images/delete.svg" />
-                                          </button>
-                                    </div>
-                              </div>
-                        </div>
-                    
-                        <div class="form-group col-lg-2">
-                              <label for="option-name" class="visibility-hidden">Enter your option</label>
-                              <div class="input-group mb-3">
-                                    <input type="text" id="option-name" class="form-control" placeholder="Enter your option" />
-                                    <div class="input-group-append">
-                                          <button class="input-group-text" id="option-add-btn">
+                                          <button id="option-add-btn" class="input-group-text add-btn">
                                                 <img src="Images/add.svg" />
                                           </button>
                                     </div>
-                                    <div class="input-group-append">
-                                          <button id="option-edit-save-btn" class="input-group-text edit-save-btn display-none">
-                                                <img src="Images/tick.svg" />
-                                          </button>
-                                    </div>
                               </div>
                         </div>
-                        <div class="form-group col-lg-2 ">
-                              <label for="question-option-save-btn" class="visibility-hidden">Save</label>
-                              <div class="input-group mb-2">
-                                    <button id="question-option-save-btn" type="button" class="btn btn-secondary">
-                                          Save
+                        <div class="form-group col-lg-3">
+                                    <label for="question-option-save-btn" class="visibility-hidden">Save</label>
+                                    <button id="question-option-save-btn" class="input-group-text edit-save-btn">
+                                          <img src="Images/tick.svg" />
                                     </button>
-                              </div>
+                         </div>
+                        <div class="form-group col-lg-3">
+                                    <label for="question-dropdown-list">Select Question</label>
+                                    <div class="input-group mb-3">
+                                          <select class="form-control" id="question-dropdown-list">
+                                          </select>
+                                    </div>
                         </div>
                   </div>
                   <!-- <div class="row" id="entity-parent-container">
@@ -162,6 +149,7 @@
                               <select class="form-control" id="parent-group-list"> </select>
                         </div>
                   </div> -->
+                  <br>
                   <div class="input-group mb-2">
                         <button id="save-group-details-btn" type="button" class="btn btn-secondary">
                               Save
@@ -170,7 +158,7 @@
             </div>
             <br>
             <div class="row" id="group-input-container">
-                  <div class="form-group col-lg-4 ">
+                  <div class="form-group col-lg-3">
                         <div class="input-group mb-3">
                               <input type="text" id="group-name" class="form-control" placeholder="Enter Group Name" />
                               <div class="input-group-append">
@@ -185,6 +173,7 @@
       <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script type="text/javascript" src="Scripts/store.js"></script>
       <script type="text/javascript" src="Scripts/htmlTemplateModule.js"></script>
+      <script type="text/javascript" src="Scripts/htmlDataListTemplateModule.js"></script>
       <script type="text/javascript" src="Scripts/architectureModule.js"></script>
       <script type="text/javascript" src="Scripts/groupModule.js"></script>
       <script type="text/javascript" src="Scripts/groupDetailsModule.js"></script>
