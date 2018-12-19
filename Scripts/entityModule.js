@@ -2,11 +2,11 @@ const entityModule = (() => {
     let domElements = {};
     // Add newly created entity to entity dropdown list
     const addToEntityDropdown = (optionTemplate, entityList) => {
-        let $entityDropdownList = domElements.entityDropdownList
-        let $entityEditBtn = domElements.entityEditBtn;
-        let $entityDeleteBtn = domElements.entityDeleteBtn;
-        let $entityName = domElements.entityName;
-        let entityName = $entityName.val();
+        let $entityDropdownList = domElements.entityDropdownList,
+            $entityEditBtn = domElements.entityEditBtn,
+            $entityDeleteBtn = domElements.entityDeleteBtn,
+            $entityName = domElements.entityName,
+            entityName = $entityName.val();
         if (entityName === '') {
             alert('Please enter value for Entity')
         }

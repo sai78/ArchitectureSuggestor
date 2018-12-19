@@ -1,11 +1,11 @@
 const questionOptionsModule = (() => {
-    let domElements = {};
-    let questionOptionObj = {};
+    let domElements = {},
+        questionOptionObj = {};
     // Add options to options dropdown list
     const addToOptionDropdown = (dataListOptionTemplate) => {
-        let $optionDropdownList = domElements.optionDropdownList;
-        let $optionName = domElements.optionName;
-        let optionName = $optionName.val();
+        let $optionDropdownList = domElements.optionDropdownList,
+            $optionName = domElements.optionName,
+            optionName = $optionName.val();
         if (optionName === '') {
             alert('Please enter value for option');
         }
@@ -19,48 +19,80 @@ const questionOptionsModule = (() => {
     }
     // Add question to questions dropdown list
     const addToQuestionDropdown = (optionTemplate) => {
-        let $questionDropdownList = domElements.questionDropdownList;
-        let $questionName = domElements.questionName;
-        let questionName = $questionName.val();
-        let $optionName = domElements.optionName;
-        let optionName = $optionName.val();
-        let $entityDropdownList = domElements.entityDropdownList;
+        let $questionDropdownList = domElements.questionDropdownList,
+            questionIdCounter = store.state.questionIdCounter,
+            $optionDropdownList = domElements.optionDropdownList,
+            $questionName = domElements.questionName,
+            questionObj = {},
+            questionName = $questionName.val(),
+            $optionName = domElements.optionName,
+            optionName = $optionName.val(),
+            $entityDropdownList = domElements.entityDropdownList;
         if (questionName === '') {
             alert('Please enter value for option');
         }
         else {
-            let questionIdCounter = store.state.questionIdCounter;
-            let $optionDropdownList = domElements.optionDropdownList;
             $questionName.val('');
-            $questionDropdownList.prepend(
-                optionTemplate.replace('#option#', questionName)
-                    .replace('#name#', questionName)
-                    .replace('#value#', questionIdCounter)
-            );
-            $questionDropdownList.val($questionDropdownList.find('option').first().val());
-            let id = store.incrementQuestioIdCounter();
-            let $selectedOption = $entityDropdownList.find('option:selected');
-            let selectedOptionVal = $selectedOption.attr('value');
-            let questionObj = {};
-            questionObj[questionIdCounter] = {};
-            questionObj[questionIdCounter].questionName = questionName;
-            questionObj[questionIdCounter].options = optionName;
-            if (!(selectedOptionVal in questionOptionObj)) {
-                questionOptionObj[selectedOptionVal] = questionObj;
+            let $selectedEntiyOption = $entityDropdownList.find('option:selected'),
+                selectedEntityOptionVal = $selectedEntiyOption.attr('value');
+            if (!(questionIdCounter in questionObj)) {
+                if (($questionName.attr('disabled') != 'disabled')) {
+                    questionObj[questionIdCounter] = {};
+                    questionObj[questionIdCounter].questionName = questionName;
+                    questionObj[questionIdCounter].options = optionName;
+                    $questionDropdownList.prepend(
+                        optionTemplate.replace('#option#', questionName)
+                            .replace('#name#', questionName)
+                            .replace('#value#', questionIdCounter)
+                    );
+                    store.incrementQuestioIdCounter();
+                }
+                else {
+                    let $selectedQuestionOption = $questionDropdownList.find('option:selected'),
+                        selectedQuestionOptionVal = $selectedQuestionOption.attr('value'),
+                        selectedQuestionOptionName = $selectedQuestionOption.attr('data-name'),
+                        selectedOptionName = $optionDropdownList.val();
+                    for (key in questionOptionObj) {
+                        let questionObj = questionOptionObj[key];
+                        if (selectedQuestionOptionVal in questionObj) {
+                            questionObj[selectedQuestionOptionVal] = {};
+                            questionObj[selectedQuestionOptionVal].questionName = selectedQuestionOptionName;
+                            questionObj[selectedQuestionOptionVal].options = selectedOptionName;
+                        }
+                    }
+                }
+                if (!(selectedEntityOptionVal in questionOptionObj)) {
+                    questionOptionObj[selectedEntityOptionVal] = questionObj;
+                }
+                $questionDropdownList.val($questionDropdownList.find('option').first().val());
             }
-            $optionName.val('');
+            console.log(questionOptionObj);
+            $optionName.val('')
             $optionDropdownList.empty();
+            if ($questionName.attr('disabled') == 'disabled') {
+                $questionName.removeAttr('disabled');
+            }
         }
     }
-    const displaySelectedQuestion = () => {
-        let $questionName = domElements.questionName;
-        let $questionDropdownList = domElements.questionDropdownList;
-        let $optionDropdownList = domElements.optionDropdownList;
-        let $selectedOption = $questionDropdownList.find('option:selected')
-        let selectedOptionVal = $selectedOption.attr('data-name');
+    const displaySelectedQuestion = (dataListOptionTemplate) => {
+        let $questionName = domElements.questionName,
+            $questionDropdownList = domElements.questionDropdownList,
+            $optionDropdownList = domElements.optionDropdownList,
+            $selectedOption = $questionDropdownList.find('option:selected'),
+            selectedOptionVal = $selectedOption.attr('data-name');
         $questionName.val(selectedOptionVal);
-        $questionName.attr('readonly', 'true');
-        $optionDropdownList
+        $questionName.attr('disabled', 'true');
+        for (selectedOptionVal in questionOptionObj) {
+            let questionObj = questionOptionObj[selectedOptionVal];
+            for (key in questionObj) {
+                if (questionObj[key].questionName === $questionName.val()) {
+                    $optionDropdownList.empty();
+                    $optionDropdownList.prepend(
+                        dataListOptionTemplate.replace('#option#', questionObj[key].options));
+                }
+            }
+        }
+        //$optionDropdownList.val($optionDropdownList.find('option').first().val());
     }
     // Initializing DOM elements
     const InitializeDomElements = () => {

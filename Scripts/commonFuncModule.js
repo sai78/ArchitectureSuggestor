@@ -1,38 +1,45 @@
 const commonFuncModule = (() => {
     let domElements = {};
     const editElement = (event) => {
-        let formGroup = '.form-group';
-        let inputGroupAppend = '.input-group-append';
-        let editSaveBtn = '.edit-save-btn';
-        let addBtn = '.add-btn';
-        let $dropDownElement = $(event.currentTarget).parent().siblings('select');
-        let $selectedOption = $dropDownElement.find('option:selected')
-        let selectedOptionVal = $selectedOption.attr('data-name');
-        let $formGroup = $dropDownElement.closest(formGroup);
-        let $inputElement = $formGroup.siblings(formGroup).find('input[type=text]');
-        let $saveEditBtn = $inputElement.siblings(inputGroupAppend).find(editSaveBtn);
-        let $addBtn = $inputElement.siblings(inputGroupAppend).find(addBtn);
+        let formGroup = '.form-group',
+            inputGroupAppend = '.input-group-append',
+            editSaveBtn = '.edit-save-btn',
+            addBtn = '.add-btn',
+            formControl = '.form-control',
+            $dropDownElement = $(event.currentTarget).parent().siblings('select'),
+            $selectedOption = $dropDownElement.find('option:selected'),
+            selectedOptionVal = $selectedOption.attr('data-name'),
+            $formGroup = $dropDownElement.closest(formGroup),
+            $inputElement = $formGroup.siblings(formGroup).find('input[type=text]'),
+            $saveEditBtn = $inputElement.siblings(inputGroupAppend).find(editSaveBtn),
+            $addBtn = $inputElement.siblings(inputGroupAppend).find(addBtn);
         $inputElement.val(selectedOptionVal);
         $inputElement.focus();
         $saveEditBtn.removeClass('display-none');
         $addBtn.addClass('display-none');
     }
     const saveElement = (optionTemplate, event) => {
-        let formGroup = '.form-group';
-        let inputGroup = '.input-group';
-        let inputGroupAppend = '.input-group-append';
-        let editSaveBtn = '.edit-save-btn';
-        let addBtn = '.add-btn';
-        let $inputElement = $(event.currentTarget).closest(inputGroup).find('input[type=text]');
-        let $inputParentElement = $inputElement.closest(formGroup);
-        let $dropDownElement = $inputParentElement.siblings(formGroup).find('select');
-        let $selectedOption = $dropDownElement.find('option:selected')
-        let inputElementName = $inputElement.val();
+        let formGroup = '.form-group',
+            inputGroup = '.input-group',
+            inputGroupAppend = '.input-group-append',
+            editSaveBtn = '.edit-save-btn',
+            addBtn = '.add-btn',
+            row = '.row',
+            formControl = '.form-control',
+            $inputElement = $(event.currentTarget).closest(inputGroup).find('input[type=text]'),
+            $inputParentElement = $inputElement.closest(formGroup),
+            $dropDownElement = $inputParentElement.siblings(formGroup).find('select'),
+            $dropDownElementForQuestion = $dropDownElement.closest(row).siblings(row).find(formGroup).find(formControl),
+            $selectedOption = $dropDownElement.find('option:selected'),
+            $selectedOptionForQuestion = $dropDownElementForQuestion.find('option:selected'),
+            inputElementName = $inputElement.val(),
+            $addBtn = $inputElement.siblings(inputGroupAppend).find(addBtn),
+            $saveEditBtn = $inputElement.siblings(inputGroupAppend).find(editSaveBtn);
         $inputElement.val('');
-        let $addBtn = $inputElement.siblings(inputGroupAppend).find(addBtn);
-        let $saveEditBtn = $inputElement.siblings(inputGroupAppend).find(editSaveBtn);
         $selectedOption.text(inputElementName);
         $selectedOption.attr('data-name', inputElementName);
+        $selectedOptionForQuestion.text(inputElementName);
+        $selectedOptionForQuestion.attr('data-name', inputElementName);
         $addBtn.removeClass('display-none');
         $saveEditBtn.addClass('display-none');
     }

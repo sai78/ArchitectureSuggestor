@@ -5,8 +5,8 @@ const groupDetailsModule = (() => {
         $groupDetailsContainer.removeClass('display-none');
     }
     const hideGroupDetailsContainer = () => {
-        let $groupDetailsContainer = domElements.groupDetailsContainer;
-        let $groupInputContainer= domElements.groupInputContainer;
+        let $groupDetailsContainer = domElements.groupDetailsContainer,
+            $groupInputContainer = domElements.groupInputContainer;
         $groupInputContainer.addClass('display-none');
         $groupDetailsContainer.addClass('display-none');
     }
