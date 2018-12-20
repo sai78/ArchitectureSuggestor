@@ -103,7 +103,7 @@
                         </div>
                   </div>
                   <div class="row" id="question-option-input-container">
-                        <div class="form-group col-lg-8">
+                        <div class="form-group col-lg-9">
                               <label for="entity-list">Select Entity</label>
                               <div class="input-group">
                                     <select class="form-control" id="entity-list"> </select>
@@ -111,30 +111,31 @@
                                           <input type="text" id="question-name" class="form-control" placeholder="Enter your question">
                                     </div>
                                     <div class="input-group-append">
-                                          <input type="text" id="option-name" class="form-control" placeholder="Enter your option"
-                                                list="option-dropdown-list" />
-                                          <datalist id="option-dropdown-list">
-                                          </datalist>
+                                          <input type="text" id="option-name" class="form-control" placeholder="Enter your option">
                                     </div>
                                     <div class="input-group-append">
-                                          <button id="option-add-btn" class="input-group-text add-btn">
-                                                <img src="Images/add.svg" />
-                                          </button>
+                                          <select class="form-control" id="option-dropdown-list">
+                                          </select>
                                     </div>
+                                    <div class="input-group-append">
+                                                <button id="option-add-btn" class="input-group-text add-btn">
+                                                      <img src="Images/add.svg" />
+                                                </button>
+                                          </div>
                               </div>
                         </div>
                         <div class="form-group col-lg-3">
-                                    <label for="question-option-save-btn" class="visibility-hidden">Save</label>
-                                    <button id="question-option-save-btn" class="input-group-text edit-save-btn">
-                                          <img src="Images/tick.svg" />
-                                    </button>
-                         </div>
+                              <label for="question-option-save-btn" class="visibility-hidden">Save</label>
+                              <button id="question-option-save-btn" class="input-group-text edit-save-btn">
+                                    <img src="Images/tick.svg" />
+                              </button>
+                        </div>
                         <div class="form-group col-lg-3">
-                                    <label for="question-dropdown-list">Select Question</label>
-                                    <div class="input-group mb-3">
-                                          <select class="form-control" id="question-dropdown-list">
-                                          </select>
-                                    </div>
+                              <label for="question-dropdown-list">Select Question</label>
+                              <div class="input-group mb-3">
+                                    <select class="form-control" id="question-dropdown-list">
+                                    </select>
+                              </div>
                         </div>
                   </div>
                   <!-- <div class="row" id="parent-entity-container">
@@ -173,7 +174,6 @@
       <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script type="text/javascript" src="Scripts/store.js"></script>
       <script type="text/javascript" src="Scripts/htmlTemplateModule.js"></script>
-      <script type="text/javascript" src="Scripts/htmlDataListTemplateModule.js"></script>
       <script type="text/javascript" src="Scripts/architectureModule.js"></script>
       <script type="text/javascript" src="Scripts/groupModule.js"></script>
       <script type="text/javascript" src="Scripts/groupDetailsModule.js"></script>

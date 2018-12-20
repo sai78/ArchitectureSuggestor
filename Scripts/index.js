@@ -1,7 +1,6 @@
 // Bind events and initialize dom elements when DOM is loaded
 $(document).ready(() => {
     let htmlTemplates = htmlTemplateModule();
-    let htmlDataListTemplates = htmlDataListTemplateModule();
     // Initialize DOM elements for commonFuncModule
     commonFuncModule.InitializeDomElements();
     // Initialize DOM elements for architecure components
@@ -25,13 +24,13 @@ $(document).ready(() => {
     // Add events for common dom components
     commonFuncModule.domElements.editBtn.on('click', commonFuncModule.editElement.bind(null));
     // Edit and saves the element
-    commonFuncModule.domElements.editSaveBtn.on('click', commonFuncModule.saveElement.bind(null, htmlTemplates.optionTemplate));
+    commonFuncModule.domElements.editSaveBtn.on('click', commonFuncModule.saveElement.bind(null));
     // Add events for entity components
     entityModule.domElements.entityAddBtn.on('click', entityModule.addToEntityDropdown.bind(null, htmlTemplates.optionTemplate, questionOptionsModule.domElements.entityDropdownList));
     // Add events for option components
-    questionOptionsModule.domElements.optionAddBtn.on('click', questionOptionsModule.addToOptionDropdown.bind(null, htmlDataListTemplates.dataListOptionTemplate));
-    // Add events for option components
+    questionOptionsModule.domElements.optionAddBtn.on('click', questionOptionsModule.addToOptionDropdown.bind(null, htmlTemplates.optionTemplate));
+    // Add events for question components
     questionOptionsModule.domElements.questionOptionSaveBtn.on('click', questionOptionsModule.addToQuestionDropdown.bind(null,  htmlTemplates.optionTemplate));
     // display selected question
-    questionOptionsModule.domElements.questionDropdownList.on('change',questionOptionsModule.displaySelectedQuestion.bind(null , htmlDataListTemplates.dataListOptionTemplate));
+    questionOptionsModule.domElements.questionDropdownList.on('change',questionOptionsModule.displaySelectedQuestion.bind(null , htmlTemplates.optionTemplate));
 })

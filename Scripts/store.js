@@ -21,7 +21,7 @@ const store = {
     incrementOptionIdCounter() {
         this.state.optionIdCounter += 1;
     },
-    incrementQuestioIdCounter() {
+    incrementQuestionIdCounter() {
         this.state.questionIdCounter += 1;
     },
 }

@@ -2,11 +2,11 @@ const entityModule = (() => {
     let domElements = {};
     // Add newly created entity to entity dropdown list
     const addToEntityDropdown = (optionTemplate, entityList) => {
-        let $entityDropdownList = domElements.entityDropdownList,
-            $entityEditBtn = domElements.entityEditBtn,
-            $entityDeleteBtn = domElements.entityDeleteBtn,
-            $entityName = domElements.entityName,
-            entityName = $entityName.val();
+        let $entityDropdownList = domElements.entityDropdownList;
+        let $entityEditBtn = domElements.entityEditBtn;
+        let $entityDeleteBtn = domElements.entityDeleteBtn;
+        let $entityName = domElements.entityName;
+        let entityName = $entityName.val();
         if (entityName === '') {
             alert('Please enter value for Entity')
         }
@@ -21,13 +21,13 @@ const entityModule = (() => {
             $entityEditBtn.removeClass('display-none');
             $entityDeleteBtn.removeClass('display-none');
             store.incrementEntityIdCounter();
-            $entityDropdownList.val($entityDropdownList.find('option').first().val());
+            $entityDropdownList.val($entityDropdownList. find('option'). first(). val());
             entityList.prepend(
                 optionTemplate.replace('#option#', entityName)
                     .replace('#name#', entityName)
                     .replace('#value#', entityIdCounter)
             );
-            entityList.val($entityDropdownList.find('option').first().val());
+            entityList.val($entityDropdownList. find('option'). first(). val());
         }
     }
     // Initializing DOM elements

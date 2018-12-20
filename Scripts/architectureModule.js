@@ -2,11 +2,11 @@ const architectureModule = (() => {
     let domElements = {};
     // Add newly created group to architecture dropdown list
     const addToArchitectureDropdown = (optionTemplate) => {
-        let $architectureDropdownList = domElements.architectureNameList,
-            $architectureEditBtn = domElements.architectureEditBtn,
-            $architectureDeleteBtn = domElements.architectureDeleteBtn,
-            $architectureName = domElements.architectureName,
-            architectureName = $architectureName.val();
+        let $architectureDropdownList = domElements.architectureNameList;
+        let $architectureEditBtn = domElements.architectureEditBtn;
+        let $architectureDeleteBtn = domElements.architectureDeleteBtn;
+        let $architectureName = domElements.architectureName;
+        let architectureName = $architectureName.val();
         if (architectureName === '') {
             alert('please enter Architecture Name');
         }
@@ -21,7 +21,7 @@ const architectureModule = (() => {
             $architectureEditBtn.removeClass('display-none');
             $architectureDeleteBtn.removeClass('display-none');
             store.incrementArchitectureIdCounter();
-            $architectureDropdownList.val($architectureDropdownList.find('option').first().val());
+            $architectureDropdownList.val($architectureDropdownList. find('option'). first(). val());
         }
     }
     // Initialize DOM elements for architecture Component

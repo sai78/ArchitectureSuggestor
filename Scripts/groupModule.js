@@ -3,12 +3,12 @@ const groupModule = (() => {
     let domElements = {};
     //Add newly created group to group dropdown list
     const addToGroupDropdown = () => {
-        let $groupNameInput = domElements.groupNameInput,
-            $groupName = domElements.groupName,
-            $architectureName = domElements.architectureName,
-            architectureName = $architectureName.val(),
-            groupName = $groupName.val();
-        if (groupName === '' || architectureName === '') {
+        let $groupNameInput = domElements.groupNameInput;
+        let $groupName = domElements.groupName;
+        let $architectureName = domElements.architectureName;
+        let architectureName = $architectureName.val();
+        let groupName = $groupName.val();
+        if (groupName === '') {
             alert('please enter Name');
         }
         else {
