@@ -5,10 +5,9 @@ const groupModule = (() => {
     const addToGroupDropdown = () => {
         let $groupNameInput = domElements.groupNameInput;
         let $groupName = domElements.groupName;
-        let $architectureName = domElements.architectureName;
-        let architectureName = $architectureName.val();
+        let architectureNameListLength = $("#architecture-name-list option").length;
         let groupName = $groupName.val();
-        if (groupName === '') {
+        if (groupName === '' || architectureNameListLength == 0) {
             alert('please enter Name');
         }
         else {
@@ -24,7 +23,7 @@ const groupModule = (() => {
         domElements.groupName = $('#group-name');
         domElements.groupInputContainer = $('#group-input-container');
         domElements.groupNameInput = $('#groupName-input');
-        domElements.architectureName = $('#architecture-name');
+        domElements.architectureNameList = $('#architecture-name-list');
     }
     return {
         domElements,

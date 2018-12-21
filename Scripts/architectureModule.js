@@ -16,7 +16,7 @@ const architectureModule = (() => {
             $architectureDropdownList.prepend(
                 optionTemplate.replace('#option#', architectureName)
                     .replace('#name#', architectureName)
-                    .replace('#value#', architectureIdCounter)
+                    .replace('#id#', architectureIdCounter)
             );
             $architectureEditBtn.removeClass('display-none');
             $architectureDeleteBtn.removeClass('display-none');

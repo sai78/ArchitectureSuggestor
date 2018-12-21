@@ -11,7 +11,7 @@ const commonFuncModule = (() => {
     const editElement = (event) => {
         let $dropDownElement = $(event.currentTarget). parent(). siblings('select');
         let $selectedOption = $dropDownElement.find('option:selected');
-        let selectedOptionVal = $selectedOption.attr('data-name');
+        let selectedOptionVal = $selectedOption.attr('value');
         let $formGroup = $dropDownElement.closest(formGroup);
         let $inputElement = $formGroup. siblings(formGroup). find('input[type=text]');
         let $saveEditBtn = $inputElement. siblings(inputGroupAppend). find(editSaveBtn);
@@ -34,9 +34,9 @@ const commonFuncModule = (() => {
         let $saveEditBtn = $inputElement. siblings(inputGroupAppend). find(editSaveBtn);
         $inputElement.val('');
         $selectedOption.text(inputElementName);
-        $selectedOption.attr('data-name', inputElementName);
+        $selectedOption.attr('value', inputElementName);
         $selectedOptionForQuestion.text(inputElementName);
-        $selectedOptionForQuestion.attr('data-name', inputElementName);
+        $selectedOptionForQuestion.attr('value', inputElementName);
         $addBtn.removeClass('display-none');
         $saveEditBtn.addClass('display-none');
     }

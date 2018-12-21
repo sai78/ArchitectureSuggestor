@@ -5,10 +5,17 @@ const groupDetailsModule = (() => {
         $groupDetailsContainer.removeClass('display-none');
     }
     const hideGroupDetailsContainer = () => {
-        let $groupDetailsContainer = domElements.groupDetailsContainer,
-            $groupInputContainer = domElements.groupInputContainer;
+        let $groupDetailsContainer = domElements.groupDetailsContainer;
+        let  $groupInputContainer = domElements.groupInputContainer;
+        let $entityNameList = domElements.entityNameList;
+        let $entityList = domElements.entityList;
+        let $questionDropdownList = domElements.questionDropdownList;
+        $entityNameList.empty();
+        $entityList.empty();
+        $questionDropdownList.empty();
         $groupInputContainer.addClass('display-none');
         $groupDetailsContainer.addClass('display-none');
+
     }
     // Initialize DOM elements for group  details Component
     const InitializeDomElements = () => {
@@ -16,6 +23,9 @@ const groupDetailsModule = (() => {
         domElements.groupDetailsContainer = $('#group-details-container');
         domElements.saveGroupDetailsBtn = $('#save-group-details-btn');
         domElements.groupInputContainer = $('#group-input-container');
+        domElements.entityNameList = $('#entity-name-list');
+        domElements.entityList = $('#entity-list');
+        domElements.questionDropdownList = $('#question-dropdown-list');
     }
     return {
         domElements,

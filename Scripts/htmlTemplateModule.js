@@ -1,5 +1,5 @@
 const htmlTemplateModule = () => {
     let templateObj = {};
-    templateObj.optionTemplate = `<option value = '#value#' data-name = '#name#'>#option#</option>`;
+    templateObj.optionTemplate = `<option value = '#name#' data-id = '#id#'>#option#</option>`;
     return templateObj
 }

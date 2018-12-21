@@ -16,7 +16,7 @@ const entityModule = (() => {
             $entityDropdownList.prepend(
                 optionTemplate.replace('#option#', entityName)
                     .replace('#name#', entityName)
-                    .replace('#value#', entityIdCounter)
+                    .replace('#id#', entityIdCounter)
             );
             $entityEditBtn.removeClass('display-none');
             $entityDeleteBtn.removeClass('display-none');
@@ -24,8 +24,8 @@ const entityModule = (() => {
             $entityDropdownList.val($entityDropdownList. find('option'). first(). val());
             entityList.prepend(
                 optionTemplate.replace('#option#', entityName)
-                    .replace('#name#', entityName)
-                    .replace('#value#', entityIdCounter)
+                .replace('#name#', entityName)
+                .replace('#id#', entityIdCounter)
             );
             entityList.val($entityDropdownList. find('option'). first(). val());
         }
