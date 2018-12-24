@@ -106,25 +106,14 @@ const questionOptionsModule = (() => {
         let $optionDropdownList = domElements.optionDropdownList;
         $questionName.val(selectedQuestionName);
         $questionName.attr('disabled', 'true');
-        let highlightValueobj =    entityQuestionObj[selectedEntityId][questionIdCounter]
-        let highlightValue = highlightValueobj.selectedOptionName
         if (selectedQuestionValue in questionOptionObj) {
             $optionDropdownList.empty();
             for ( let x=0 ;x<questionOptionObj[selectedQuestionValue].options.length; x++ ){
-                if (questionOptionObj[selectedQuestionValue].options[x] == highlightValue ){
             $optionDropdownList.prepend(
                 optionTemplate.replace('#option#', questionOptionObj[selectedQuestionValue].options[x])
                     .replace('#name#', questionOptionObj[selectedQuestionValue].options[x])
                     .replace('#id#', questionOptionObj[selectedQuestionValue].options[x])
-            ).addClass('highlight');
-                }
-                else{
-                    $optionDropdownList.prepend(
-                optionTemplate.replace('#option#', questionOptionObj[selectedQuestionValue].options[x])
-                    .replace('#name#', questionOptionObj[selectedQuestionValue].options[x])
-                    .replace('#id#', questionOptionObj[selectedQuestionValue].options[x])
-            ) 
-                }
+            )
             }
         }
     }
@@ -143,6 +132,8 @@ const questionOptionsModule = (() => {
         InitializeDomElements,
         addToQuestionDropdown,
         addToOptionDropdown,
-        displaySelectedQuestion
+        displaySelectedQuestion,
+        entityQuestionObj,
+        questionOptionObj
     }
 })();
