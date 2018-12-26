@@ -17,6 +17,8 @@ $(document).ready(() => {
     architectureModule.domElements.architectureAddBtn.on('click', architectureModule.addToArchitectureDropdown.bind(null, htmlTemplates.optionTemplate));
     // Add events for Group components
     groupModule.domElements.groupAddBtn.on('click', groupModule.addToGroupDropdown.bind(null, htmlTemplates.optionTemplate));
+    // display group details component
+    groupDetailsModule.domElements.groupDetailsDisplayBtn.on('click', groupDetailsModule.displayGroupDetailsContainer.bind(null));
     // hide group details component
      groupDetailsModule.domElements.saveGroupDetailsBtn.on('click', groupDetailsModule.hideGroupDetailsContainer.bind(null));
     // Add events for common dom components
@@ -31,6 +33,4 @@ $(document).ready(() => {
     questionOptionsModule.domElements.questionOptionSaveBtn.on('click', questionOptionsModule.addToQuestionDropdown.bind(null,  htmlTemplates.optionTemplate));
     // display selected question
     questionOptionsModule.domElements.questionDropdownList.on('change',questionOptionsModule.displaySelectedQuestion.bind(null , htmlTemplates.optionTemplate));
-    // display group details component
-    groupDetailsModule.domElements.groupDetailsDisplayBtn.on('click', groupDetailsModule.displayGroupDetailsContainer.bind(null));
 })

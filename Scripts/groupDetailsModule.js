@@ -44,7 +44,7 @@ const groupDetailsModule = (() => {
                 architectureDetailsObj[selectedArchitectureId].groups = {};
                 architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId] = {};
                 architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].name = groupName;
-                architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].RelatedGroups = {};
+                architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].relatedGroups = {};
                 architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].isActive = 'false';
                 if (!(selectedEntityId in entityDetailsObj)) {
                     architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities = {};
@@ -63,7 +63,7 @@ const groupDetailsModule = (() => {
             if (!(groupName in groupDetailsObj)) {
                 architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId] = {};
                 architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].name = groupName;
-                architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].RelatedGroups = {};
+                architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].relatedGroups = {};
                 architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].isActive = 'false';
                 if (!(selectedEntityId in entityDetailsObj)) {
                     architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities = {};
@@ -97,6 +97,7 @@ const groupDetailsModule = (() => {
         domElements,
         InitializeDomElements,
         displayGroupDetailsContainer,
-        hideGroupDetailsContainer
+        hideGroupDetailsContainer,
+        architectureDetailsObj
     }
 })()

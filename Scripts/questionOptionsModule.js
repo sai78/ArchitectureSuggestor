@@ -1,16 +1,15 @@
 const questionOptionsModule = (() => {
     let domElements = {};
-    let entityQuestionObj = {};
-    let questionOptionObj = {};
+    let questionEntityMappingObj = {};
+    let questionDetailsObj = {};
     let optionList = [];
-
     // Add options to options dropdown list
     const addToOptionDropdown = (optionTemplate) => {
         let $optionDropdownList = domElements.optionDropdownList;
-        let optionDropdownListOption  = "#option-dropdown-list option";
+        let optionDropdownListOption = "#option-dropdown-list option";
+        let $questionName = domElements.questionName;
         let questionIdCounter = store.state.questionIdCounter;
         let $optionName = domElements.optionName;
-        let $questionName = domElements.questionName;
         let optionIdCounter = store.state.optionIdCounter;
         let optionName = $optionName.val();
         if (optionName === '') {
@@ -23,77 +22,109 @@ const questionOptionsModule = (() => {
                     .replace('#name#', optionName)
                     .replace('#id#', optionIdCounter)
             );
-            if(($questionName.attr('disabled') != 'disabled'))
-            {
+            if (($questionName.attr('disabled') != 'disabled')) {
                 optionList.push(optionName);
-            } 
-            else{
-                $(optionDropdownListOption).each(function() {
+            }
+            else {
+                $(optionDropdownListOption).each(function () {
                     optionList.push(this.value)
                 });
             }
         }
-            $optionName.val('');
-            $optionDropdownList.val($optionDropdownList.find('option').last().val());
-            store.incrementOptionIdCounter();
-        }
+        $optionName.val('');
+        $optionDropdownList.val($optionDropdownList.find('option').last().val());
+        store.incrementOptionIdCounter();
+    }
     // Add question to questions dropdown list
     const addToQuestionDropdown = (optionTemplate) => {
-        let $entityDropdownList = domElements.entityDropdownList;
         let optionSelected = 'option:Selected';
-        let $optionDropdownList = domElements.optionDropdownList;
-        let $questionDropdownList = domElements.questionDropdownList;
-        let $questionName = domElements.questionName;
+        let $architectureNameList = domElements.architectureNameList;
+        let $selectedArchitecture = $architectureNameList.find(optionSelected);
+        let selectedArchitectureId = $selectedArchitecture.attr('data-id');
+        let $entityDropdownList = domElements.entityDropdownList;
         let $selectedEntity = $entityDropdownList.find(optionSelected);
-        let selectedEntityName = $selectedEntity.attr('value');
         let selectedEntityId = $selectedEntity.attr('data-id');
+        let $optionDropdownList = domElements.optionDropdownList;
         let $selectedOption = $optionDropdownList.find(optionSelected);
-        let selectedOptionName = $selectedOption.attr('value');
+        let selectedOptionValue = $selectedOption.attr('value');
+        let $questionName = domElements.questionName;
         let questionName = $questionName.val();
+        let $questionDropdownList = domElements.questionDropdownList;
+        let $selectedQuestion = $questionDropdownList.find(optionSelected);
+        let slectedQuestionId = $selectedQuestion.attr('data-id');
         let questionIdCounter = store.state.questionIdCounter;
+        let $groupNameInput = domElements.groupNameInput;
+        let groupId = $groupNameInput.attr('data-id');
+
         if (questionName === '') {
             alert('Please enter value for option');
         }
         else {
             $questionName.val('');
-            if (!(questionIdCounter in questionOptionObj) && ($questionName.attr('disabled') != 'disabled')) {
-                questionOptionObj[questionIdCounter] = {};
-                questionOptionObj[questionIdCounter].description = questionName;
-                questionOptionObj[questionIdCounter].options = optionList;
-                $questionDropdownList.prepend(
-                    optionTemplate.replace('#option#', questionName)
-                        .replace('#name#', questionName)
-                        .replace('#id#', questionIdCounter)
-                );
+            $questionDropdownList.prepend(
+                optionTemplate.replace('#option#', questionName)
+                    .replace('#name#', questionName)
+                    .replace('#id#', questionIdCounter)
+            );
+            if (!(selectedArchitectureId in questionDetailsObj) && ($questionName.attr('disabled') != 'disabled')) {
+                questionDetailsObj[selectedArchitectureId] = {};
+                questionDetailsObj[selectedArchitectureId].groups = {};
+                if (!(groupId in questionDetailsObj[selectedArchitectureId].groups)) {
+                    questionDetailsObj[selectedArchitectureId].groups[groupId] = {};
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter] = {}
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter].question = questionName;
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter].choices = optionList;
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter].isActive = 'false';
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter].multiple = 'true';
+                }
+                else {
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter] = {}
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter].question = questionName;
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter].choices = optionList;
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter].isActive = 'false';
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter].multiple = 'true';
+                }
             }
             else {
-                let optionSelected = 'option:Selected';
-                let $selectedQuestionOption = $questionDropdownList.find(optionSelected);
-                let selectedQuestionOptionVal = $selectedQuestionOption.attr('data-id');
-                let selectedQuestionOptionName = $selectedQuestionOption.attr('value');
-                questionOptionObj[selectedQuestionOptionVal] = {};
-                questionOptionObj[selectedQuestionOptionVal].description = selectedQuestionOptionName;
-                questionOptionObj[selectedQuestionOptionVal].options = optionList;
+
+                if (!(groupId in questionDetailsObj[selectedArchitectureId].groups)) {
+                    questionDetailsObj[selectedArchitectureId].groups[groupId] = {};
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter] = {}
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter].question = questionName;
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter].choices = optionList;
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter].isActive = 'false';
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter].multiple = 'true'
+                }
+                else {
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter] = {}
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter].question = questionName;
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter].choices = optionList;
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter].isActive = 'false';
+                    questionDetailsObj[selectedArchitectureId].groups[groupId][questionIdCounter].multiple = 'true';
+                }
+                optionList = [];
+                $questionDropdownList.val($questionDropdownList.find('option').first().val())
             }
-            optionList = [];
-            if (!(selectedEntityId in entityQuestionObj)) {
-                entityQuestionObj[selectedEntityId] = {};
-                entityQuestionObj[selectedEntityId][questionIdCounter] = {};
-                entityQuestionObj[selectedEntityId][questionIdCounter].selectedOptionName = selectedOptionName;
+            if($questionName.attr('disabled') != 'disabled')
+            {
+                if(!(questionIdCounter in questionEntityMappingObj))
+                {
+                questionEntityMappingObj[questionIdCounter] = {};
+                questionEntityMappingObj[questionIdCounter][selectedEntityId] = selectedOptionValue;
+                }
             }
-            else {
-                entityQuestionObj[selectedEntityId][questionIdCounter] = {};
-                entityQuestionObj[selectedEntityId][questionIdCounter].selectedOptionName = selectedOptionName;
+            else
+            {
+                questionEntityMappingObj[slectedQuestionId][selectedEntityId] = selectedOptionValue;
             }
-            $questionDropdownList.val($questionDropdownList.find('option').first().val())
+            $optionDropdownList.empty();
+            store.incrementQuestionIdCounter();
+            if ($questionName.attr('disabled') == 'disabled') {
+                $questionName.removeAttr('disabled');
+            }
+            console.log(questionDetailsObj);
+            console.log(questionEntityMappingObj);
         }
-        $optionDropdownList.empty();
-        store.incrementQuestionIdCounter();
-        if ($questionName.attr('disabled') == 'disabled') {
-            $questionName.removeAttr('disabled');
-        }
-        console.log(questionOptionObj)
-        console.log(entityQuestionObj)
     }
     // Display selected question and option values
     const displaySelectedQuestion = (optionTemplate) => {
@@ -106,14 +137,14 @@ const questionOptionsModule = (() => {
         let $optionDropdownList = domElements.optionDropdownList;
         $questionName.val(selectedQuestionName);
         $questionName.attr('disabled', 'true');
-        if (selectedQuestionValue in questionOptionObj) {
+        if (selectedQuestionValue in questionDetailsObj) {
             $optionDropdownList.empty();
-            for ( let x=0 ;x<questionOptionObj[selectedQuestionValue].options.length; x++ ){
-            $optionDropdownList.prepend(
-                optionTemplate.replace('#option#', questionOptionObj[selectedQuestionValue].options[x])
-                    .replace('#name#', questionOptionObj[selectedQuestionValue].options[x])
-                    .replace('#id#', questionOptionObj[selectedQuestionValue].options[x])
-            )
+            for (let x = 0; x < questionDetailsObj[selectedQuestionValue].options.length; x++) {
+                $optionDropdownList.prepend(
+                    optionTemplate.replace('#option#', questionDetailsObj[selectedQuestionValue].options[x])
+                        .replace('#name#', questionDetailsObj[selectedQuestionValue].options[x])
+                        .replace('#id#', questionDetailsObj[selectedQuestionValue].options[x])
+                )
             }
         }
     }
@@ -126,6 +157,9 @@ const questionOptionsModule = (() => {
         domElements.optionAddBtn = $('#option-add-btn');
         domElements.questionOptionSaveBtn = $('#question-option-save-btn');
         domElements.questionDropdownList = $('#question-dropdown-list');
+        domElements.architectureNameList = $('#architecture-name-list');
+        domElements.groupNameInput = $('#groupName-input');
+
     }
     return {
         domElements,
@@ -133,7 +167,7 @@ const questionOptionsModule = (() => {
         addToQuestionDropdown,
         addToOptionDropdown,
         displaySelectedQuestion,
-        entityQuestionObj,
-        questionOptionObj
+        questionEntityMappingObj,
+        questionDetailsObj
     }
 })();
