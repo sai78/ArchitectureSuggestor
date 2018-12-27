@@ -20,7 +20,7 @@ $(document).ready(() => {
     // display group details component
     groupDetailsModule.domElements.groupDetailsDisplayBtn.on('click', groupDetailsModule.displayGroupDetailsContainer.bind(null));
     // hide group details component
-     groupDetailsModule.domElements.saveGroupDetailsBtn.on('click', groupDetailsModule.hideGroupDetailsContainer.bind(null));
+     groupDetailsModule.domElements.saveGroupDetailsBtn.on('click', groupDetailsModule.hideGroupDetailsContainer.bind(null ,questionOptionsModule.questionDetailsObj));
     // Add events for common dom components
     commonFuncModule.domElements.editBtn.on('click', commonFuncModule.editElement.bind(null));
     // Edit and saves the element

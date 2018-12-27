@@ -3,40 +3,50 @@ const groupDetailsModule = (() => {
     let architectureDetailsObj = {};
     let groupDetailsObj = {};
     let entityDetailsObj = {};
-    let selectedGroupId = 0;
     const displayGroupDetailsContainer = () => {
         let $groupDetailsContainer = domElements.groupDetailsContainer;
         $groupDetailsContainer.removeClass('display-none');
     }
-    const hideGroupDetailsContainer = () => {
-        let $groupDetailsContainer = domElements.groupDetailsContainer;
-        let $groupInputContainer = domElements.groupInputContainer;
-        let $entityNameList = domElements.entityNameList;
+    const hideGroupDetailsContainer = (questionDetailsObj) => {     
+        let $architectureDropdownList = domElements.architectureNameList;
+        let $selectedArchitecture = $architectureDropdownList.find('option:selected');
+        let selectedArchitectureName = $selectedArchitecture.attr('value');
+        let selectedArchitectureId = $selectedArchitecture.attr('data-id');
+        let $groupNameInput = domElements.groupNameInput;
+        let selectedGroupId = $groupNameInput.attr('data-id');
         let $entityList = domElements.entityList;
         let $selectedEntity = $entityList.find('option:selected');
         let selectedEntityName = $selectedEntity.attr('value');
         let selectedEntityId = $selectedEntity.attr('data-id');
+        let $groupDetailsContainer = domElements.groupDetailsContainer;
+        let $groupInputContainer = domElements.groupInputContainer;
+        let $entityNameList = domElements.entityNameList;
         let $questionDropdownList = domElements.questionDropdownList;
         let $optionDropdownList = domElements.optionDropdownList;
         let $questionName = domElements.questionName;
-        let $architectureDropdownList = domElements.architectureNameList;
-        let $groupNameInput = domElements.groupNameInput;
         let groupName = $groupNameInput.val();
-        selectedGroupId += 1;
-        let $selectedArchitecture = $architectureDropdownList.find('option:selected');
-        let selectedArchitectureName = $selectedArchitecture.attr('value');
-        let selectedArchitectureId = $selectedArchitecture.attr('data-id');
-        $entityNameList.empty();
-        $entityList.empty();
-        $optionDropdownList.empty();
-        $questionDropdownList.empty();
-        $groupInputContainer.addClass('display-none');
-        $groupDetailsContainer.addClass('display-none');
-        $questionName.val('');
+        let entityObj  = {};
+        let questions = [];
         if ($questionName.attr('disabled') == 'disabled') {
             $questionName.removeAttr('disabled');
         }
-
+        $("#question-dropdown-list option").each(function()
+        {
+            let questionId = $(this).attr('data-id');
+                questions.push(questionId);          
+        });
+        $("#entity-name-list option").each(function()
+        {
+            let entityId = $(this).attr('data-id');
+            let entityName = $(this).attr('value');
+            entityObj[entityId] = {};
+            entityObj[entityId].name = entityName;
+            entityObj[entityId].isActive = 'true';
+            entityObj[entityId].parentEnitites = {};
+            entityObj[entityId].questions = questions;
+            entityObj[entityId].filteredBy = "";
+        });
+        console.log(entityObj);
         if (!(selectedArchitectureId in architectureDetailsObj)) {
             architectureDetailsObj[selectedArchitectureId] = {};
             architectureDetailsObj[selectedArchitectureId].name = selectedArchitectureName;
@@ -44,39 +54,33 @@ const groupDetailsModule = (() => {
                 architectureDetailsObj[selectedArchitectureId].groups = {};
                 architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId] = {};
                 architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].name = groupName;
-                architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].relatedGroups = {};
                 architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].isActive = 'false';
+                architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].relatedGroups = {};
                 if (!(selectedEntityId in entityDetailsObj)) {
-                    architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities = {};
-                    architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities[selectedEntityId] = {};
-                    architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities[selectedEntityId].name = selectedEntityName;
-                    architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities[selectedEntityId].isActive = 'false';
-                    architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities[selectedEntityId].parentEnitites = {};
-                    architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities[selectedEntityId].questions = [];
-                    architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities[selectedEntityId].filteredBy = "";
+                    architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities = entityObj;
                 }
-
             }
         }
-        else{
+        else {
             architectureDetailsObj[selectedArchitectureId].name = selectedArchitectureName;
             if (!(groupName in groupDetailsObj)) {
                 architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId] = {};
                 architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].name = groupName;
-                architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].relatedGroups = {};
                 architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].isActive = 'false';
+                architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].relatedGroups = {};
                 if (!(selectedEntityId in entityDetailsObj)) {
-                    architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities = {};
-                    architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities[selectedEntityId] = {};
-                    architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities[selectedEntityId].name = selectedEntityName;
-                    architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities[selectedEntityId].isActive = 'false';
-                    architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities[selectedEntityId].parentEnitites = {};
-                    architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities[selectedEntityId].questions = [];
-                    architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities[selectedEntityId].filteredBy = "";
+                    architectureDetailsObj[selectedArchitectureId].groups[selectedGroupId].enitities = entityObj;
                 }
 
             }
         }
+        $entityNameList.empty();
+        $entityList.empty();
+        $optionDropdownList.empty();
+        $questionDropdownList.empty();
+        $groupInputContainer.addClass('display-none');
+        $groupDetailsContainer.addClass('display-none');
+        $questionName.val('');
         console.log(architectureDetailsObj);
     }
     // Initialize DOM elements for group  details Component
