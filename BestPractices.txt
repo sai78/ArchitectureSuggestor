@@ -1,0 +1,2 @@
+populate all the entered groups in a list and show for related groups.
+

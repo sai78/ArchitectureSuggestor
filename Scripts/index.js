@@ -32,5 +32,5 @@ $(document).ready(() => {
     // Add events for question components
     questionOptionsModule.domElements.questionOptionSaveBtn.on('click', questionOptionsModule.addToQuestionDropdown.bind(null,  htmlTemplates.optionTemplate));
     // display selected question
-    questionOptionsModule.domElements.questionDropdownList.on('change',questionOptionsModule.displaySelectedQuestion.bind(null , htmlTemplates.optionTemplate));
+    questionOptionsModule.domElements.questionDropdownList.on('change',questionOptionsModule.displaySelectedQuestion.bind(null , htmlTemplates.optionTemplate , serviceCallModule));
 })

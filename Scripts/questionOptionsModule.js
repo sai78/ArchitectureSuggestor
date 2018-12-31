@@ -1,11 +1,9 @@
 const questionOptionsModule = (() => {
     let domElements = {};
-    let questionEntityMappingObj = {};
-    let questionDetailsObj = {};
-    let architectureDetailsObj = {};
-    let groupDetailsObj = {};
-    let entityDetailsObj = {};
+    let questionEntityMappingObj = store.state.questionEntityMappingObj;
+    let questionDetailsObj = store.state.questionDetailsObj;
     let optionList = [];
+    let url ='http://localhost:3000/';
     // Add options to options dropdown list
     const addToOptionDropdown = (optionTemplate) => {
         let $optionDropdownList = domElements.optionDropdownList;
@@ -39,7 +37,7 @@ const questionOptionsModule = (() => {
         store.incrementOptionIdCounter();
     }
     // Add question to questions dropdown list
-    const addToQuestionDropdown = (optionTemplate) => {
+    const addToQuestionDropdown = (optionTemplate , getDetails) => {
         let optionSelected = 'option:Selected';
         let $architectureNameList = domElements.architectureNameList;
         let $selectedArchitecture = $architectureNameList.find(optionSelected);
@@ -147,7 +145,10 @@ const questionOptionsModule = (() => {
             }
             console.log(questionDetailsObj);
             console.log(questionEntityMappingObj);
+            store.setQuestionDetailsObj(questionDetailsObj);
+            store.setQuestionEntityMappingObj(questionEntityMappingObj);
         }
+        //getDetails(url);
     }
     // Display selected question and option values
     const displaySelectedQuestion = (optionTemplate) => {

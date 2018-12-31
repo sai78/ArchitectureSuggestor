@@ -1,6 +1,6 @@
 const groupDetailsModule = (() => {
     let domElements = {};
-    let architectureDetailsObj = {};
+    let architectureDetailsObj = store.state.architectureDetailsObj;
     let groupDetailsObj = {};
     let entityDetailsObj = {};
     const displayGroupDetailsContainer = () => {
@@ -82,6 +82,7 @@ const groupDetailsModule = (() => {
         $groupDetailsContainer.addClass('display-none');
         $questionName.val('');
         console.log(architectureDetailsObj);
+        store.setArchitectureDetailsObj (architectureDetailsObj);
     }
     // Initialize DOM elements for group  details Component
     const InitializeDomElements = () => {

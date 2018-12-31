@@ -1,10 +1,8 @@
 const store = {
     state: {
-        architectureObj: {},
-        entityObj:{},
-        option:{},
-        groupObj:{},
-        questionOptionObj:{},
+        architectureDetailsObj: {},
+        questionEntityMappingObj: {},
+        questionDetailsObj:{},
         editMode: false,
         architectureIdCounter: 1,
         groupIdCounter: 1,
@@ -32,4 +30,13 @@ const store = {
     incrementQuestionIdCounter() {
         this.state.questionIdCounter += 1;
     },
+    setArchitectureDetailsObj (architectureDetailsObj){
+        this.state.architectureDetailsObj = architectureDetailsObj;
+    },
+    setQuestionEntityMappingObj (questionEntityMappingObj){
+        this.state.questionEntityMappingObj = questionEntityMappingObj;
+    },
+    setQuestionDetailsObj (questionDetailsObj){
+        this.state.questionDetailsObj = questionDetailsObj;
+    }
 }
