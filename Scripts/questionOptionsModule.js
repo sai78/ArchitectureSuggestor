@@ -37,7 +37,7 @@ const questionOptionsModule = (() => {
         store.incrementOptionIdCounter();
     }
     // Add question to questions dropdown list
-    const addToQuestionDropdown = (optionTemplate , getDetails) => {
+    const addToQuestionDropdown = (optionTemplate) => {
         let optionSelected = 'option:Selected';
         let $architectureNameList = domElements.architectureNameList;
         let $selectedArchitecture = $architectureNameList.find(optionSelected);
@@ -148,7 +148,6 @@ const questionOptionsModule = (() => {
             store.setQuestionDetailsObj(questionDetailsObj);
             store.setQuestionEntityMappingObj(questionEntityMappingObj);
         }
-        //getDetails(url);
     }
     // Display selected question and option values
     const displaySelectedQuestion = (optionTemplate) => {

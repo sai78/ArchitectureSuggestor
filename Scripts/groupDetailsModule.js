@@ -7,7 +7,7 @@ const groupDetailsModule = (() => {
         let $groupDetailsContainer = domElements.groupDetailsContainer;
         $groupDetailsContainer.removeClass('display-none');
     }
-    const hideGroupDetailsContainer = (questionDetailsObj) => {     
+    const hideGroupDetailsContainer = (questionDetailsObj , questionEntityMappingObj) => {     
         let $architectureDropdownList = domElements.architectureNameList;
         let $selectedArchitecture = $architectureDropdownList.find('option:selected');
         let selectedArchitectureName = $selectedArchitecture.attr('value');
@@ -83,6 +83,13 @@ const groupDetailsModule = (() => {
         $questionName.val('');
         console.log(architectureDetailsObj);
         store.setArchitectureDetailsObj (architectureDetailsObj);
+        let dataObj = {
+            questionEntityMappingObj : questionEntityMappingObj,
+            questionDetailsObj : questionDetailsObj,
+            architectureDetailsObj : architectureDetailsObj
+        }
+        $.post('http://localhost:3000/',{data: JSON.stringify(dataObj)});
+        dataObj = {};
     }
     // Initialize DOM elements for group  details Component
     const InitializeDomElements = () => {
